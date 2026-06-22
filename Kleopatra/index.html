@@ -19,6 +19,7 @@
       <nav class="top-nav" aria-label="ページ内メニュー">
         <a href="#prepare">準備</a>
         <a href="#steps">手順</a>
+        <a href="#hatolife">鍵の例</a>
         <a href="#results">結果の見方</a>
         <a href="#trouble">困った時</a>
       </nav>
@@ -182,6 +183,72 @@
             <p>
               黄色い注意が出ても、署名とファイルの対応が確認できている場合があります。
               赤いエラーや「署名が正しくありません」に相当する表示が出たら、そのファイルは実行しません。
+            </p>
+          </li>
+        </ol>
+      </section>
+
+      <section id="hatolife" class="content-section key-example-section">
+        <div class="section-heading">
+          <p class="eyebrow">Example</p>
+          <h2>pgp.hato.lifeの公開鍵で確認する例</h2>
+        </div>
+        <div class="key-example-layout">
+          <div>
+            <p>
+              hato.lifeでは用途を分けた2つのPGP公開鍵を使います。
+              どちらも <a href="../public/">公開鍵ページ</a> から確認できます。
+              Kleopatraにインポートするときは、用途とFingerprintを見比べてください。
+            </p>
+            <div class="example-box">
+              <strong>まず見るところ</strong>
+              <p>
+                署名者名だけで判断せず、Fingerprint全体が一致しているかを確認します。
+                似た名前の別鍵を間違って入れないためです。
+              </p>
+            </div>
+          </div>
+          <div class="key-cards">
+            <article class="key-card">
+              <span class="key-purpose">コミット用</span>
+              <h3>Gitのコミット署名を確認する鍵</h3>
+              <p class="fingerprint">A256 3716 E502 15E2 5B75 E4EE F603 3F2A 3D70 179C</p>
+              <p>
+                GitHubのコミット画面で署名情報を見る時や、Gitでコミット署名を検証する時に使う鍵です。
+              </p>
+            </article>
+            <article class="key-card">
+              <span class="key-purpose release">CIリリース用</span>
+              <h3>リリースファイルの署名を確認する鍵</h3>
+              <p class="fingerprint">BE40 AA8D 082F 493F 613B C072 21DC 3486 1B40 E77D</p>
+              <p>
+                CIで作った配布ファイルと <code>.asc</code> 署名ファイルをKleopatraで確認する時に使う鍵です。
+              </p>
+            </article>
+          </div>
+        </div>
+
+        <ol class="steps compact-steps">
+          <li>
+            <div class="step-title">
+              <span>例 1</span>
+              <h3>CIリリースファイルをKleopatraで確認する</h3>
+            </div>
+            <p>
+              リリースページから配布ファイルと同名の <code>.asc</code> ファイルを同じフォルダーに保存します。
+              KleopatraにCIリリース用公開鍵をインポートしてから、<code>.asc</code> ファイルをドラッグ&ドロップします。
+              結果画面の署名鍵が <code>BE40AA8D082F493F613BC07221DC34861B40E77D</code> と一致すれば、この鍵で署名されたファイルです。
+            </p>
+          </li>
+          <li>
+            <div class="step-title">
+              <span>例 2</span>
+              <h3>GitHub上のコミット署名を確認する</h3>
+            </div>
+            <p>
+              GitHubのコミット詳細で署名情報を開き、署名に使われた鍵のFingerprintを確認します。
+              コミット用公開鍵 <code>A2563716E50215E25B75E4EEF6033F2A3D70179C</code> と一致していれば、
+              hato.lifeのコミット用鍵で署名されたコミットとして確認できます。
             </p>
           </li>
         </ol>
