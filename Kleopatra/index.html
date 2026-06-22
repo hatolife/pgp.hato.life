@@ -3,342 +3,76 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Windowsでダウンロードファイルを確認する | KleopatraでPGP署名チェック</title>
-    <meta
-      name="description"
-      content="WindowsでGpg4win/Kleopatraを使い、ダウンロードしたファイルが改ざんされていないか確認する初心者向けガイドです。"
-    >
+    <title>KleopatraでPGP署名を確認する</title>
+    <meta name="description" content="WindowsでKleopatraを使ってPGP署名を確認する短い手順です。">
     <link rel="stylesheet" href="./style.css">
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="#top" aria-label="ページ先頭へ">
-        <span class="brand-mark">PGP</span>
-        <span>ダウンロード確認ガイド</span>
-      </a>
-      <nav class="top-nav" aria-label="ページ内メニュー">
-        <a href="#prepare">準備</a>
-        <a href="#steps">手順</a>
-        <a href="#hatolife">鍵の例</a>
-        <a href="#results">結果の見方</a>
-        <a href="#trouble">困った時</a>
-      </nav>
+    <header>
+      <a class="brand" href="./">PGP確認</a>
+      <nav><a href="../public/">公開鍵</a></nav>
     </header>
 
-    <main id="top">
-      <section class="hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Windows / Gpg4win / Kleopatra</p>
-          <h1>ダウンロードしたファイルが本物か、クリック前に確認する</h1>
-          <p class="lead">
-            PGP署名を使うと、インストーラーやZIPファイルが配布元のものから変わっていないかを確認できます。
-            このページでは、PCに詳しくない人でも迷いにくいように、Kleopatraの画面操作だけで説明します。
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#steps">手順を見る</a>
-            <a class="button secondary" href="#results">成功と危険を先に確認</a>
-          </div>
-        </div>
-        <figure class="hero-visual" aria-label="ファイルと署名を確認する流れの図">
-          <div class="screen">
-            <div class="window-bar">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="verify-flow">
-              <div class="file-card">
-                <span class="file-icon">MSI</span>
-                <strong>installer.msi</strong>
-                <small>本体ファイル</small>
-              </div>
-              <div class="file-card accent">
-                <span class="file-icon">ASC</span>
-                <strong>installer.msi.asc</strong>
-                <small>署名ファイル</small>
-              </div>
-              <div class="result-card ok">
-                <span class="status-dot"></span>
-                <strong>署名チェック完了</strong>
-                <small>本体と署名が合っています</small>
-              </div>
-            </div>
-          </div>
-        </figure>
-      </section>
+    <main>
+      <h1>ダウンロードしたファイルが本物か確認する</h1>
+      <p class="lead">
+        本体ファイルと <code>.asc</code> 署名ファイルをKleopatraで確認します。
+        <strong>赤いエラーが出たら実行しません。</strong>
+      </p>
 
-      <section class="notice-band">
-        <div>
-          <strong>この確認でわかること</strong>
-          <p>ファイルが配布元の署名と合っているかを見ます。赤いエラーが出たファイルは実行しません。</p>
-        </div>
-        <div>
-          <strong>この確認だけでは足りないこと</strong>
-          <p>配布元そのものが安全か、PCに入れてよいソフトかまでは判断できません。</p>
-        </div>
-      </section>
-
-      <section id="prepare" class="content-section">
-        <div class="section-heading">
-          <p class="eyebrow">Before You Start</p>
-          <h2>準備するもの</h2>
-        </div>
-        <div class="prep-grid">
-          <article class="prep-item">
-            <span class="number">1</span>
-            <h3>Gpg4win</h3>
-            <p>
-              Gpg4winをインストールします。いっしょに入る「Kleopatra」を使います。
-              インストール後、スタートメニューからKleopatraを開いてください。
-            </p>
-          </article>
-          <article class="prep-item">
-            <span class="number">2</span>
-            <h3>確認したいファイル</h3>
-            <p>
-              例: <code>mysql-installer-community-8.0.29.msi</code> のような、実際に実行・展開したいファイルです。
-            </p>
-          </article>
-          <article class="prep-item">
-            <span class="number">3</span>
-            <h3>署名ファイル</h3>
-            <p>
-              例: <code>mysql-installer-community-8.0.29.msi.asc</code>。
-              本体ファイルと同じ名前に <code>.asc</code> が付いたものを同じフォルダーに置きます。
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section id="steps" class="content-section steps-section">
-        <div class="section-heading">
-          <p class="eyebrow">Step by Step</p>
-          <h2>Kleopatraで確認する手順</h2>
-        </div>
-
-        <ol class="steps">
-          <li>
-            <div class="step-title">
-              <span>Step 1</span>
-              <h3>配布元の証明書をKleopatraに入れる</h3>
-            </div>
-            <p>
-              Kleopatraを開き、メニューから「ファイル」または「File」、
-              「サーバー上の証明書を検索」または「Lookup Certificates on Server」を選びます。
-              検索欄に配布元の証明書名を入力します。
-            </p>
-            <div class="example-box">
-              <strong>MySQLの場合</strong>
-              <p>
-                <code>MySQL Release Engineering</code> を検索します。
-                公式手順では、Key-IDまたはFingerprintが <code>5072E1F5</code> の証明書を確認してインポートします。
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div class="step-title">
-              <span>Step 2</span>
-              <h3>証明書の信頼設定をする</h3>
-            </div>
-            <p>
-              インポートした証明書を選び、メニューの「証明書」から「所有者信頼を変更」のような項目を開きます。
-              MySQL公式手順では「チェックは非常に正確であると思う」に相当する設定を選ぶ、と説明されています。
-            </p>
-            <p class="soft-warning">
-              この操作は「今後この署名者を確認に使う」という設定です。知らない配布元に対して、何でも信頼にしないでください。
-            </p>
-          </li>
-
-          <li>
-            <div class="step-title">
-              <span>Step 3</span>
-              <h3>本体ファイルと.ascファイルを同じフォルダーに置く</h3>
-            </div>
-            <p>
-              2つのファイル名が対応しているか見ます。片方だけでは確認できません。
-              署名ファイルは、配布ページの「Signature」などのリンクから入手します。
-            </p>
-            <div class="file-pair" aria-label="ファイル名の例">
-              <span>mysql-installer-community-8.0.29.msi</span>
-              <span>mysql-installer-community-8.0.29.msi.asc</span>
-            </div>
-          </li>
-
-          <li>
-            <div class="step-title">
-              <span>Step 4</span>
-              <h3>.ascファイルをKleopatraで検証する</h3>
-            </div>
-            <p>
-              <code>.asc</code> ファイルをKleopatraの画面へドラッグ&ドロップします。
-              うまくいかない場合は、メニューの「ファイル」から「復号/検証」または「Decrypt/Verify Files」を選び、
-              <code>.asc</code> ファイルを選択します。
-            </p>
-          </li>
-
-          <li>
-            <div class="step-title">
-              <span>Step 5</span>
-              <h3>結果を見て、実行してよいか判断する</h3>
-            </div>
-            <p>
-              黄色い注意が出ても、署名とファイルの対応が確認できている場合があります。
-              赤いエラーや「署名が正しくありません」に相当する表示が出たら、そのファイルは実行しません。
-            </p>
-          </li>
+      <section>
+        <h2>手順</h2>
+        <ol>
+          <li>配布元の公開鍵をKleopatraにインポートします。</li>
+          <li>本体ファイルと <code>.asc</code> を同じフォルダーに置きます。</li>
+          <li><code>.asc</code> をKleopatraへドラッグ&ドロップして結果を見ます。</li>
         </ol>
       </section>
 
-      <section id="hatolife" class="content-section key-example-section">
-        <div class="section-heading">
-          <p class="eyebrow">Example</p>
-          <h2>pgp.hato.lifeの公開鍵で確認する例</h2>
-        </div>
-        <div class="key-example-layout">
-          <div>
-            <p>
-              hato.lifeでは用途を分けた2つのPGP公開鍵を使います。
-              どちらも <a href="../public/">公開鍵ページ</a> から確認できます。
-              Kleopatraにインポートするときは、用途とFingerprintを見比べてください。
-            </p>
-            <div class="example-box">
-              <strong>まず見るところ</strong>
-              <p>
-                署名者名だけで判断せず、Fingerprint全体が一致しているかを確認します。
-                似た名前の別鍵を間違って入れないためです。
-              </p>
-            </div>
-          </div>
-          <div class="key-cards">
-            <article class="key-card">
-              <span class="key-purpose">コミット用</span>
-              <h3>Gitのコミット署名を確認する鍵</h3>
-              <p class="fingerprint">A256 3716 E502 15E2 5B75 E4EE F603 3F2A 3D70 179C</p>
-              <p>
-                GitHubのコミット画面で署名情報を見る時や、Gitでコミット署名を検証する時に使う鍵です。
-              </p>
-            </article>
-            <article class="key-card">
-              <span class="key-purpose release">CIリリース用</span>
-              <h3>リリースファイルの署名を確認する鍵</h3>
-              <p class="fingerprint">BE40 AA8D 082F 493F 613B C072 21DC 3486 1B40 E77D</p>
-              <p>
-                CIで作った配布ファイルと <code>.asc</code> 署名ファイルをKleopatraで確認する時に使う鍵です。
-              </p>
-            </article>
-          </div>
-        </div>
-
-        <ol class="steps compact-steps">
-          <li>
-            <div class="step-title">
-              <span>例 1</span>
-              <h3>CIリリースファイルをKleopatraで確認する</h3>
-            </div>
-            <p>
-              リリースページから配布ファイルと同名の <code>.asc</code> ファイルを同じフォルダーに保存します。
-              KleopatraにCIリリース用公開鍵をインポートしてから、<code>.asc</code> ファイルをドラッグ&ドロップします。
-              結果画面の署名鍵が <code>BE40AA8D082F493F613BC07221DC34861B40E77D</code> と一致すれば、この鍵で署名されたファイルです。
-            </p>
-          </li>
-          <li>
-            <div class="step-title">
-              <span>例 2</span>
-              <h3>GitHub上のコミット署名を確認する</h3>
-            </div>
-            <p>
-              GitHubのコミット詳細で署名情報を開き、署名に使われた鍵のFingerprintを確認します。
-              コミット用公開鍵 <code>A2563716E50215E25B75E4EEF6033F2A3D70179C</code> と一致していれば、
-              hato.lifeのコミット用鍵で署名されたコミットとして確認できます。
-            </p>
-          </li>
-        </ol>
+      <section>
+        <h2>結果の見方</h2>
+        <ul>
+          <li><strong>署名が合っている:</strong> 実行してよい可能性が高いです。</li>
+          <li><strong>黄色い注意:</strong> Fingerprintを確認します。</li>
+          <li><strong>赤いエラー / Bad / Invalid signature:</strong> 実行しません。</li>
+        </ul>
       </section>
 
-      <section id="results" class="content-section">
-        <div class="section-heading">
-          <p class="eyebrow">Result Check</p>
-          <h2>結果の見方</h2>
-        </div>
-        <div class="result-grid">
-          <article class="result-panel success">
-            <span class="result-label">実行してよい可能性が高い</span>
-            <h3>署名とファイルが合っている</h3>
-            <p>
-              Kleopatraが検証を完了し、署名者の情報が表示されます。
-              黄色い注意があっても、公式手順では成功扱いになるケースがあります。
-            </p>
-          </article>
-          <article class="result-panel danger">
-            <span class="result-label">実行しない</span>
-            <h3>赤いエラー、Bad、Invalid signature</h3>
-            <p>
-              ファイルが壊れている、別のファイル用の署名を使っている、または改ざんの可能性があります。
-              そのファイルは開かず、公式サイトから本体と署名をもう一度ダウンロードしてください。
-            </p>
-          </article>
-          <article class="result-panel neutral">
-            <span class="result-label">確認し直す</span>
-            <h3>署名ファイルが見つからない</h3>
-            <p>
-              本体ファイルと <code>.asc</code> ファイルが同じフォルダーにあるか、名前が対応しているかを確認します。
-              ダウンロード途中のファイルでも失敗します。
-            </p>
-          </article>
-        </div>
+      <section>
+        <h2>hato.lifeの鍵</h2>
+        <p><a href="../public/">公開鍵ページ</a>から取得します。用途に合うFingerprintを確認してください。</p>
+        <table>
+          <tbody>
+            <tr>
+              <th>コミット用</th>
+              <td><code>A2563716E50215E25B75E4EEF6033F2A3D70179C</code></td>
+            </tr>
+            <tr>
+              <th>CIリリース用</th>
+              <td><code>BE40AA8D082F493F613BC07221DC34861B40E77D</code></td>
+            </tr>
+          </tbody>
+        </table>
       </section>
 
-      <section id="trouble" class="content-section two-column">
-        <div class="section-heading">
-          <p class="eyebrow">Troubleshooting</p>
-          <h2>よくあるつまずき</h2>
-        </div>
-        <div class="qa-list">
-          <details open>
-            <summary>.ascファイルを開いても文字ばかり出ます</summary>
-            <p>
-              正常です。<code>.asc</code> は署名の文字データです。
-              メモ帳で読むのではなく、Kleopatraにドラッグ&ドロップして使います。
-            </p>
-          </details>
-          <details>
-            <summary>証明書の検索結果が見つかりません</summary>
-            <p>
-              インターネット接続、入力した名前、会社名の表記を確認します。
-              配布元の公式ページに、証明書やFingerprintの案内があるかも確認してください。
-            </p>
-          </details>
-          <details>
-            <summary>黄色の警告が不安です</summary>
-            <p>
-              黄色は「署名とファイルは合うが、信頼の確認までは完全ではない」という意味で出ることがあります。
-              公式が示す証明書名、メールアドレス、Key-IDやFingerprintと合っているかを見ます。
-            </p>
-          </details>
-          <details>
-            <summary>どこからダウンロードすればよいですか</summary>
-            <p>
-              ソフト名で検索して出てきた広告やまとめサイトではなく、配布元の公式サイトから本体ファイルと署名ファイルを入手してください。
-            </p>
-          </details>
-        </div>
+      <section>
+        <h2>MySQLの例</h2>
+        <p>
+          <code>MySQL Release Engineering</code> を探し、Key-IDまたはFingerprintが
+          <code>5072E1F5</code> であることを確認します。
+        </p>
+        <p>
+          例: <code>mysql-installer-community-8.0.29.msi</code> と
+          <code>mysql-installer-community-8.0.29.msi.asc</code> を同じフォルダーに置きます。
+        </p>
       </section>
 
-      <section class="source-band">
-        <div>
-          <h2>参考にした公式情報</h2>
-          <p>
-            このページは、MySQL公式ドキュメント
-            <a href="https://dev.mysql.com/doc/refman/8.0/ja/checking-gpg-signature-windows.html" rel="noopener">
-              「Gpg4win for Windows を使用した署名確認」
-            </a>
-            の流れを、Windows初心者向けに言い換えて整理したものです。
-          </p>
-        </div>
-      </section>
+      <p class="note">
+        参考:
+        <a href="https://dev.mysql.com/doc/refman/8.0/ja/checking-gpg-signature-windows.html" rel="noopener">
+          MySQL公式ドキュメント
+        </a>
+      </p>
     </main>
-
-    <footer class="site-footer">
-      <p>PGP署名チェックは、ファイルを開く前の確認習慣です。赤いエラーが出たら実行しないでください。</p>
-    </footer>
   </body>
 </html>

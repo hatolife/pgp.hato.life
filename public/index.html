@@ -4,132 +4,52 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>hato.life PGP公開鍵</title>
-    <meta
-      name="description"
-      content="hato.lifeで使うPGP公開鍵の用途、Fingerprint、keys.openpgp.orgでの確認リンクを掲載しています。"
-    >
+    <meta name="description" content="hato.lifeで使うPGP公開鍵のFingerprintと取得リンクです。">
     <link rel="stylesheet" href="../Kleopatra/style.css">
   </head>
   <body>
-    <header class="site-header">
-      <a class="brand" href="./" aria-label="公開鍵ページ">
-        <span class="brand-mark">PGP</span>
-        <span>hato.life 公開鍵</span>
-      </a>
-      <nav class="top-nav" aria-label="関連ページ">
-        <a href="../Kleopatra/">Kleopatra手順</a>
-        <a href="#keys">公開鍵</a>
-        <a href="#how-to-use">使い方</a>
-      </nav>
+    <header>
+      <a class="brand" href="./">hato.life PGP公開鍵</a>
+      <nav><a href="../Kleopatra/">確認手順</a></nav>
     </header>
 
     <main>
-      <section class="hero public-hero">
-        <div class="hero-copy">
-          <p class="eyebrow">Public Keys</p>
-          <h1>hato.lifeのPGP公開鍵</h1>
-          <p class="lead">
-            コミット署名とCIリリース署名で用途を分けています。
-            署名を確認するときは、鍵の名前だけでなくFingerprint全体を見比べてください。
-          </p>
-          <div class="hero-actions">
-            <a class="button primary" href="#keys">鍵を見る</a>
-            <a class="button secondary" href="../Kleopatra/#hatolife">確認例を見る</a>
-          </div>
-        </div>
-        <figure class="hero-visual" aria-label="公開鍵の用途を表す図">
-          <div class="screen key-screen">
-            <div class="window-bar">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="public-key-visual">
-              <div>
-                <span class="key-icon">KEY</span>
-                <strong>Commit signing</strong>
-                <small>A256 3716 ... 179C</small>
-              </div>
-              <div>
-                <span class="key-icon release">KEY</span>
-                <strong>CI release signing</strong>
-                <small>BE40 AA8D ... E77D</small>
-              </div>
-            </div>
-          </div>
-        </figure>
-      </section>
+      <h1>hato.lifeのPGP公開鍵</h1>
+      <p class="lead">インポート前にFingerprint全体が一致しているか確認してください。</p>
 
-      <section id="keys" class="content-section">
-        <div class="section-heading">
-          <p class="eyebrow">Keys</p>
-          <h2>公開鍵一覧</h2>
-        </div>
-        <div class="public-key-list">
-          <article class="public-key-card">
-            <span class="key-purpose">コミット用</span>
-            <h3>Git commit signing key</h3>
-            <p class="fingerprint">A256 3716 E502 15E2 5B75 E4EE F603 3F2A 3D70 179C</p>
-            <div class="key-links">
-              <a class="button primary" href="https://keys.openpgp.org/search?q=A2563716E50215E25B75E4EEF6033F2A3D70179C" rel="noopener">Fingerprintで見る</a>
-              <a class="button secondary" href="https://keys.openpgp.org/search?q=poppo@hato.life" rel="noopener">poppo@hato.lifeで見る</a>
-              <a class="button secondary" href="https://keys.openpgp.org/vks/v1/by-fingerprint/A2563716E50215E25B75E4EEF6033F2A3D70179C" rel="noopener">公開鍵.ascを取得</a>
-            </div>
-          </article>
+      <table>
+        <thead>
+          <tr>
+            <th>用途</th>
+            <th>Fingerprint</th>
+            <th>リンク</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>コミット用</th>
+            <td><code>A2563716E50215E25B75E4EEF6033F2A3D70179C</code></td>
+            <td class="links">
+              <a href="https://keys.openpgp.org/search?q=A2563716E50215E25B75E4EEF6033F2A3D70179C" rel="noopener">Fingerprint</a>
+              <a href="https://keys.openpgp.org/search?q=poppo@hato.life" rel="noopener">メール</a>
+              <a href="https://keys.openpgp.org/vks/v1/by-fingerprint/A2563716E50215E25B75E4EEF6033F2A3D70179C" rel="noopener">asc</a>
+            </td>
+          </tr>
+          <tr>
+            <th>CIリリース用</th>
+            <td><code>BE40AA8D082F493F613BC07221DC34861B40E77D</code></td>
+            <td class="links">
+              <a href="https://keys.openpgp.org/search?q=BE40AA8D082F493F613BC07221DC34861B40E77D" rel="noopener">Fingerprint</a>
+              <a href="https://keys.openpgp.org/search?q=release-signing@hato.life" rel="noopener">メール</a>
+              <a href="https://keys.openpgp.org/vks/v1/by-fingerprint/BE40AA8D082F493F613BC07221DC34861B40E77D" rel="noopener">asc</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
 
-          <article class="public-key-card">
-            <span class="key-purpose release">CIリリース用</span>
-            <h3>CI release signing key</h3>
-            <p class="fingerprint">BE40 AA8D 082F 493F 613B C072 21DC 3486 1B40 E77D</p>
-            <div class="key-links">
-              <a class="button primary" href="https://keys.openpgp.org/search?q=BE40AA8D082F493F613BC07221DC34861B40E77D" rel="noopener">Fingerprintで見る</a>
-              <a class="button secondary" href="https://keys.openpgp.org/search?q=release-signing@hato.life" rel="noopener">release-signing@hato.lifeで見る</a>
-              <a class="button secondary" href="https://keys.openpgp.org/vks/v1/by-fingerprint/BE40AA8D082F493F613BC07221DC34861B40E77D" rel="noopener">公開鍵.ascを取得</a>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section id="how-to-use" class="content-section steps-section">
-        <div class="section-heading">
-          <p class="eyebrow">How To Use</p>
-          <h2>Kleopatraで使う時</h2>
-        </div>
-        <ol class="steps compact-steps">
-          <li>
-            <div class="step-title">
-              <span>1</span>
-              <h3>用途に合う公開鍵を取得する</h3>
-            </div>
-            <p>
-              リリースファイルを確認するならCIリリース用、コミット署名を見るならコミット用を使います。
-              「公開鍵.ascを取得」から保存できます。
-            </p>
-          </li>
-          <li>
-            <div class="step-title">
-              <span>2</span>
-              <h3>Kleopatraにインポートする</h3>
-            </div>
-            <p>
-              保存した <code>.asc</code> ファイルをKleopatraへドラッグ&ドロップします。
-              表示されたFingerprintがこのページの表記と一致しているか確認します。
-            </p>
-          </li>
-          <li>
-            <div class="step-title">
-              <span>3</span>
-              <h3>署名ファイルを検証する</h3>
-            </div>
-            <p>
-              配布ファイルと同じフォルダーに <code>.asc</code> 署名ファイルを置き、
-              署名ファイルをKleopatraへドラッグ&ドロップします。
-            </p>
-          </li>
-        </ol>
-      </section>
+      <p class="note">
+        Kleopatraでは、取得した <code>.asc</code> をドラッグ&ドロップしてインポートします。
+      </p>
     </main>
-
-    <footer class="site-footer">
-      <p>Fingerprintが1文字でも違う場合は、その鍵を使わないでください。</p>
-    </footer>
   </body>
 </html>
