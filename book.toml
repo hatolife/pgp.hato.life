@@ -1,0 +1,16 @@
+[book]
+title = "PGP確認ガイド"
+authors = ["hato.life"]
+language = "ja"
+src = "src"
+
+[build]
+build-dir = "book"
+
+[output.html]
+default-theme = "light"
+preferred-dark-theme = "light"
+additional-css = ["theme/simple.css"]
+git-repository-url = "https://github.com/hatolife/pgp.hato.life"
+cname = "pgp.hato.life"
+input-404 = "404.md"
