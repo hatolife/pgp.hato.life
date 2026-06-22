@@ -1,6 +1,6 @@
 # Kleopatraとは
 
-結論: WindowsでPGP署名を確認するなら、現状もっとも信用して使いやすい選択肢はKleopatraです。
+WindowsでPGP署名を確認する場合、現状もっとも信用して使いやすい選択肢はKleopatraです。
 
 Kleopatraは、PGP署名の確認と公開鍵の管理を行うアプリです。
 Windowsでは、Gpg4winに含まれるKleopatraを使います。
